@@ -182,16 +182,6 @@ mod erc20 {
             self.allowances.write((owner, spender), allowance - amount);
         }
 
-        fn approve_helper(
-            ref self: ContractState,
-            owner: ContractAddress,
-            spender: ContractAddress,
-            amount: felt252
-        ) {
-            assert(!spender.is_zero(), Errors::APPROVE_TO_ZERO);
-            self.allowances.write((owner, spender), amount);
-            self.emit(Approval { owner, spender, value: amount });
-        }
 
         fn mint(ref self: ContractState, recipient: ContractAddress, amount: felt252) {
             assert(!recipient.is_zero(), Errors::MINT_TO_ZERO);
